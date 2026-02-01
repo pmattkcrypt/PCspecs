@@ -11,21 +11,21 @@ echo "C O M P U T E R  N A M E" > PCspecs_$name
 hostname >> PCspecs_$name
 echo "      " >> PCspecs_$name
 echo "R A M " >> PCspecs_$name
-free | grep Mem | awk '{print $1,$2}' >> PCspecs_$name
+free -m | grep Mem | awk '{print $1,$2}' >> PCspecs_$name
 echo "      " >> PCspecs_$name
 echo "C P U " >> PCspecs_$name
-lscpu > 0.txt; sed '8!d' 0.txt  >> PCspecs_$name; rm 0.txt
+lscpu | grep Model | awk '{print $1,$2,$3,$4,$5,$6,$7}'  >> PCspecs_$name
 echo "      " >> PCspecs_$name
 echo "M O T H E R B O A R D" >> PCspecs_$name
-sudo dmidecode -t 1 > 0.txt; sed '10!d' 0.txt >> PCspecs_$name; rm 0.txt
-sudo dmidecode -t 1 > 0.txt; sed '13!d' 0.txt >> PCspecs_$name; rm 0.txt
+sudo dmidecode -t 1 | grep Manufacturer >> PCspecs_$name
+sudo dmidecode -t 1 | grep Product >> PCspecs_$name
 echo "      " >> PCspecs_$name
 echo "H D D " >> PCspecs_$name
 # gives the size, the model and the serial number of 2 hard disks on the system. Change the value of the tail command (tail -2) for more disks (example tail -4) 
 lsblk -d -o size,model,serial | tail -2 >> PCspecs_$name; 
 echo "      " >> PCspecs_$name
 echo "O / S " >> PCspecs_$name
-lsb_release -a >> PCspecs_$name
+lsb_release -a | tail -3 >> PCspecs_$name
 echo "           " >> PCspecs_$name
 echo "K E R N E L" >> PCspecs_$name
 uname -r >> PCspecs_$name
