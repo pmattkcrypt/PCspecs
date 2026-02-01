@@ -2,13 +2,13 @@
 # filename:pcspecs.sh
 # written by: pmattkcrypt (Makrovasilis Athanasios)
 # date:1.2026
-# O/S:ubuntu
+# O/S:ubuntu LTS
 clear
 echo "The Shell Script gives basic computer's specifications"
 echo "*******************************************************"
-name=$(users | awk '{print $1}')
+name=$(hostname | awk '{print $1}')
 echo "C O M P U T E R  N A M E" > PCspecs_$name
-users | awk '{print $1}' >> PCspecs_$name
+hostname >> PCspecs_$name
 echo "      " >> PCspecs_$name
 echo "R A M " >> PCspecs_$name
 free | grep Mem | awk '{print $1,$2}' >> PCspecs_$name
