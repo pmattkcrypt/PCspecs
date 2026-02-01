@@ -21,8 +21,8 @@ sudo dmidecode -t 1 > 0.txt; sed '10!d' 0.txt >> PCspecs_$name; rm 0.txt
 sudo dmidecode -t 1 > 0.txt; sed '13!d' 0.txt >> PCspecs_$name; rm 0.txt
 echo "      " >> PCspecs_$name
 echo "H D D " >> PCspecs_$name
-sudo hdparm -i /dev/sda > 0.txt; sed '4!d' 0.txt | awk '{print $1,$3}' >> PCspecs_$name; rm 0.txt
-sudo hdparm -i /dev/sdb > 0.txt; sed '4!d' 0.txt | awk '{print $1,$3}' >> PCspecs_$name; rm 0.txt
+# gives the size, the model and the serial number of 2 hard disks on the system. Change the value of the tail command (tail -2) for more disks (example tail -4) 
+lsblk -d -o size,model,serial | tail -2 >> PCspecs_$name; 
 echo "      " >> PCspecs_$name
 echo "O / S " >> PCspecs_$name
 lsb_release -a >> PCspecs_$name
