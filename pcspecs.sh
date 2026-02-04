@@ -21,11 +21,11 @@ sudo dmidecode -t 1 | grep Manufacturer >> PCspecs_$name
 sudo dmidecode -t 1 | grep Product >> PCspecs_$name
 echo "      " >> PCspecs_$name
 echo "V G A " >> PCspecs_$name
-lspci | grep -i vga >> PCspecs_$name;
+lspci | grep -i vga >> PCspecs_$name
 echo "      " >> PCspecs_$name
 echo "H D D " >> PCspecs_$name
 #gives the model and the serial number of 2 disks/devices on the system. Change the value of the tail command (tail -2) for more disks/devices (example tail -4) 
-lsblk -d -o model,serial | tail -2 >> PCspecs_$name; 
+lsblk -d -o model,serial | tail -2 >> PCspecs_$name
 echo "      " >> PCspecs_$name
 echo "O / S " >> PCspecs_$name
 lsb_release -a | tail -3 >> PCspecs_$name
